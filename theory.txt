@@ -1,0 +1,11 @@
+Real time connections
+
+websockets -> protocol -> gives full duplex communication -> real time connection open between two person
+
+once request is sent and response is received the connection breaks after receiving the response 
+-> that is why http and https are stateless
+
+websocket -> protocol || socket.io -> library -> uses websocket
+
+** Take socket io cdn form net and use on client (frontend here) side **
+

@@ -9,3 +9,8 @@ websocket -> protocol || socket.io -> library -> uses websocket
 
 ** Take socket io cdn form net and use on client (frontend here) side **
 
+In backend we have io and socket - 
+when you want top send message to every user - io
+when you want some specific user - socket
+
+In frontendwe have only socket

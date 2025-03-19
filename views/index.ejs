@@ -6,9 +6,58 @@
         <title>Document</title>
     </head>
     <body>
+        <div class="w-full h-screen text-white bg-zinc-900">
+            <div class="flex gap-4 justify-center items-center py-20">
+                <button class="connect px-5 py-3 bg-blue-500 rounded">Connect to server</button> 
+                <button class="disconnect px-5 py-3 bg-red-500 rounded">Disconnect from server</button>
+                <input type="text" class="messagebox px-5 py-3 bg-gray-500 rounded" placeholder="Data">
+                <button class="event px-5 py-3 bg-red-500 rounded">Send some event</button>
+            </div>
+        </div>
         <script
             src="https://cdn.socket.io/4.8.1/socket.io.min.js"
             integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+        </script>
+            <!-- <script>           code for data emiting and receiving
+                var socket = io();
+                socket.emit("typing", 12);      // emit data to server
+                socket.on("efgh", (data) => {
+                    console.log(data);
+                });
+                socket.on("typing", (data) => {                 // receive data from server
+                    console.log("User is typing", data);
+                });
+            </script>
+             -->
+        <script>
+            let connect = document.querySelector(".connect");      // make connection on clicking on button
+            let disconnect = document.querySelector(".disconnect");      // disconnect connection on clicking on button
+            let socket = null;
+            connect.addEventListener("click", (evt) => {
+                socket = io();
+                socket.on("custom event", (data) => {
+                    console.log(data);
+                });
+                socket.on("typing", (data) => {
+                    console.log(data);
+                });
+            });
+            disconnect.addEventListener("input", (evt) => {
+                socket.disconnect();
+            });
+
+            let inp = document.querySelector(".messagebox");      // send data to server on typing
+            inp.addEventListener("input", (e) => {     // when someone is typing send data to server
+                socket.emit("typing");
+            });
+            let event = document.querySelector(".event");   // send data to server on clicking on button
+            event.addEventListener("click", (evt) => {
+                socket.emit("custom event", inp.value);
+            });
+            
+
+        </script>
+
     </body>
 </html>
